@@ -9,6 +9,8 @@
  */
 namespace OCA\UserExternal;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * Base class for external auth implementations that stores users
  * on their first login in a local table.
@@ -31,6 +33,15 @@ abstract class Base extends \OC\User\Backend {
 	 */
 	public function __construct($backend) {
 		$this->backend = $backend;
+	}
+
+	/**
+	 * Get logger instance
+	 *
+	 * @return LoggerInterface instance
+	 */
+	protected function getLogger() {
+		return \OC::$server->get(LoggerInterface::class);
 	}
 
 	/**
